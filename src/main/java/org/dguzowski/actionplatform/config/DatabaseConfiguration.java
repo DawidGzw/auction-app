@@ -44,7 +44,9 @@ public class DatabaseConfiguration {
     @Bean(initMethod = "start", destroyMethod = "stop")
     @Profile(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT)
     public Server h2TCPServer() throws SQLException {
-        return Server.createTcpServer("-tcp","-tcpAllowOthers");
+        Server server = Server.createTcpServer("-tcp","-tcpAllowOthers");
+        log.debug("H2 TCP server is running at URL: "+server.getURL());
+        return server;
     }
 
     @Bean
